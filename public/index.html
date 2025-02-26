@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unveiled - Reveal What's Hidden</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="main-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">Unveiled</div>
+            <div class="header-user">
+                <!-- Profile Button (visible when logged in) -->
+                <button id="profile-button" class="profile-button" style="display: none;" onclick="window.location.href='/profile.html'">
+                    <div class="user-avatar">U</div>
+                    <span class="username">Username</span>
+                </button>
+                <button id="logout-button" class="logout-button" style="display: none;" onclick="handleLogout()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M16 17L21 12L16 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M21 12H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Logout
+                </button>
+                <!-- Auth Buttons (visible when logged out) -->
+                <div id="auth-section" class="auth-section visible">
+                    <button onclick="openModal('login-modal')">Log In</button>
+                    <button class="primary" onclick="openModal('signup-modal')">Sign Up</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Login Modal -->
+        <div class="modal-overlay" id="login-modal">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <h2 class="modal-title">Log In</h2>
+                    <button class="close-modal" onclick="closeModal('login-modal')">&times;</button>
+                </div>
+                <form class="modal-form" id="login-form" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" required>
+                    </div>
+                    <div class="error-message" id="login-error"></div>
+                    <button type="submit" class="primary">Log In</button>
+                    <div class="modal-footer">
+                        <p>Don't have an account? <a onclick="switchModal('login-modal', 'signup-modal')">Sign Up</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Signup Modal -->
+        <div class="modal-overlay" id="signup-modal">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <h2 class="modal-title">Sign Up</h2>
+                    <button class="close-modal" onclick="closeModal('signup-modal')">&times;</button>
+                </div>
+                <form class="modal-form" id="signup-form" onsubmit="handleSignup(event)">
+                    <div class="form-group">
+                        <label for="signup-username">Username</label>
+                        <input type="text" id="signup-username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Email</label>
+                        <input type="email" id="signup-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" required>
+                    </div>
+                    <div class="error-message" id="signup-error"></div>
+                    <button type="submit" class="primary">Sign Up</button>
+                    <div class="modal-footer">
+                        <p>Already have an account? <a onclick="switchModal('signup-modal', 'login-modal')">Log In</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="content-wrapper">
+            <!-- Left Side Navigation - Art Categories -->
+            <nav class="side-nav">
+                <h2>Underground Arts</h2>
+                <ul class="nav-list">
+                    <li><a href="#digital-art">Digital Art</a></li>
+                    <li><a href="#street-art">Street Art</a></li>
+                    <li><a href="#alternative-music">Alternative Music</a></li>
+                    <li><a href="#experimental">Experimental</a></li>
+                    
+                    <div class="nav-category">Communities</div>
+                    <li><a href="#cyberpunk">Cyberpunk</a></li>
+                    <li><a href="#gothic">Gothic</a></li>
+                    <li><a href="#industrial">Industrial</a></li>
+                    <li><a href="#psychedelic">Psychedelic</a></li>
+                    
+                    <div class="nav-category">Mediums</div>
+                    <li><a href="#mixed-media">Mixed Media</a></li>
+                    <li><a href="#installations">Installations</a></li>
+                    <li><a href="#performance">Performance Art</a></li>
+                    <li><a href="#digital">Digital Creations</a></li>
+                </ul>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <h1 class="page-title">Unveil Your Vision</h1>
+                
+                <div class="section-grid">
+                    <!-- Featured Section (Large) -->
+                    <div class="content-section section-featured">
+                        <h2 class="section-title">Hidden Gems</h2>
+                        <div class="section-content">
+                            <p>Step into a realm where underground artists break free from convention. Discover unique pieces that challenge perception and redefine artistic expression.</p>
+                            <p style="margin-top: 1rem">Currently featuring: "Digital Dystopia" - A collaborative cyberpunk exhibition pushing the boundaries of reality.</p>
+                        </div>
+                    </div>
+
+                    <!-- Tall Section -->
+                    <div class="content-section section-tall">
+                        <h2 class="section-title">Alternative Spaces</h2>
+                        <div class="section-content">
+                            <p>Explore unconventional venues and virtual realms where artists gather to share their most daring works.</p>
+                            <p style="margin-top: 1rem">Tonight: Underground Sound Session - Live Electronic Experimental Performance</p>
+                        </div>
+                    </div>
+
+                    <!-- Regular Section -->
+                    <div class="content-section">
+                        <h2 class="section-title">Artist Marketplace</h2>
+                        <div class="section-content">
+                            <p>Support independent artists and collect unique pieces that speak to your soul.</p>
+                        </div>
+                    </div>
+
+                    <!-- Wide Section -->
+                    <div class="content-section section-large">
+                        <h2 class="section-title">Featured Creators</h2>
+                        <div class="section-content">
+                            <p>Meet the visionaries pushing boundaries and creating art that challenges the status quo.</p>
+                        </div>
+                    </div>
+
+                    <!-- Regular Section -->
+                    <div class="content-section">
+                        <h2 class="section-title">Underground Events</h2>
+                        <div class="section-content">
+                            <p>Join secret gatherings and exclusive showcases in your local alternative art scene.</p>
+                        </div>
+                    </div>
+
+                    <!-- Regular Section -->
+                    <div class="content-section">
+                        <h2 class="section-title">Creative Collectives</h2>
+                        <div class="section-content">
+                            <p>Connect with like-minded artists and join forces to create something extraordinary.</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Right Side Navigation - Community -->
+            <nav class="side-nav">
+                <h2>Community</h2>
+                <ul class="nav-list">
+                    <div class="nav-category">Connect</div>
+                    <li><a href="#collectives">Artist Collectives</a></li>
+                    <li><a href="#underground">Underground Scene</a></li>
+                    <li><a href="#collaborations">Dark Collaborations</a></li>
+                    
+                    <div class="nav-category">Discover</div>
+                    <li><a href="#techniques">Alternative Techniques</a></li>
+                    <li><a href="#manifestos">Artist Manifestos</a></li>
+                    <li><a href="#stories">Underground Stories</a></li>
+                    
+                    <div class="nav-category">Experience</div>
+                    <li><a href="#virtual-spaces">Virtual Spaces</a></li>
+                    <li><a href="#pop-up">Pop-up Galleries</a></li>
+                    <li><a href="#night-events">Night Events</a></li>
+                    
+                    <div class="nav-category">Support</div>
+                    <li><a href="#safe-space">Safe Space Guidelines</a></li>
+                    <li><a href="#help">Get Help</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <style>
+        /* Additional styles for logout button */
+        .logout-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: none;
+            border: 1px solid var(--accent-gray);
+            color: var(--light-gray);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Jura', sans-serif;
+        }
+
+        .logout-button:hover {
+            color: var(--accent-beige);
+            border-color: var(--accent-beige);
+            background: rgba(243, 223, 162, 0.1);
+        }
+
+        .header-user {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+    </style>
+
+    <script>
+        // Check authentication status
+        async function checkAuth() {
+            try {
+                const response = await fetch('/api/profile');
+                if (response.ok) {
+                    const user = await response.json();
+                    showProfileButton(user);
+                } else {
+                    showAuthButtons();
+                }
+            } catch (err) {
+                console.error('Auth check error:', err);
+                showAuthButtons();
+            }
+        }
+
+        function showProfileButton(user) {
+            const profileButton = document.getElementById('profile-button');
+            const logoutButton = document.getElementById('logout-button');
+            const authSection = document.getElementById('auth-section');
+            const avatar = profileButton.querySelector('.user-avatar');
+            const username = profileButton.querySelector('.username');
+
+            // Update profile button with user info
+            avatar.textContent = user.username.charAt(0).toUpperCase();
+            username.textContent = user.username;
+
+            // Show/hide appropriate elements
+            profileButton.style.display = 'flex';
+            logoutButton.style.display = 'flex';
+            authSection.classList.remove('visible');
+        }
+
+        function showAuthButtons() {
+            const profileButton = document.getElementById('profile-button');
+            const logoutButton = document.getElementById('logout-button');
+            const authSection = document.getElementById('auth-section');
+
+            profileButton.style.display = 'none';
+            logoutButton.style.display = 'none';
+            authSection.classList.add('visible');
+        }
+
+        // Existing modal functionality
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = 'auto';
+            // Clear form and errors
+            const form = document.getElementById(modalId).querySelector('form');
+            const error = document.getElementById(modalId).querySelector('.error-message');
+            if (form) form.reset();
+            if (error) error.style.display = 'none';
+        }
+
+        function switchModal(fromModalId, toModalId) {
+            closeModal(fromModalId);
+            setTimeout(() => openModal(toModalId), 100);
+        }
+
+        // Close modal when clicking outside
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    closeModal(overlay.id);
+                }
+            });
+        });
+
+        // Handle form submissions
+        async function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                if (response.ok) {
+                    closeModal('login-modal');
+                    checkAuth(); // Refresh auth state
+                } else {
+                    const error = document.getElementById('login-error');
+                    error.textContent = 'Invalid email or password';
+                    error.style.display = 'block';
+                }
+            } catch (err) {
+                console.error('Login error:', err);
+            }
+        }
+
+        async function handleSignup(event) {
+            event.preventDefault();
+            const username = document.getElementById('signup-username').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            
+            try {
+                const response = await fetch('/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, email, password })
+                });
+
+                if (response.ok) {
+                    switchModal('signup-modal', 'login-modal');
+                } else {
+                    const error = document.getElementById('signup-error');
+                    error.textContent = 'Failed to create account. Please try again.';
+                    error.style.display = 'block';
+                }
+            } catch (err) {
+                console.error('Signup error:', err);
+            }
+        }
+
+        // Logout functionality
+        async function handleLogout() {
+            try {
+                console.log('Attempting to logout...');
+                const response = await fetch('/logout', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    console.log('Logout successful');
+                    // Clear any stored user data/tokens
+                    localStorage.removeItem('userToken');
+                    sessionStorage.removeItem('userToken');
+                    
+                    // Show auth buttons and hide profile/logout buttons
+                    showAuthButtons();
+                    
+                    // Reload the page to ensure clean state
+                    window.location.reload();
+                } else {
+                    console.error('Logout failed:', response.status);
+                }
+            } catch (err) {
+                console.error('Error during logout:', err);
+            }
+        }
+
+        // Check auth status when page loads
+        document.addEventListener('DOMContentLoaded', checkAuth);
+    </script>
+</body>
+</html> 

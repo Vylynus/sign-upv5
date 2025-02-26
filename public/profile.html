@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Unveiled</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="main-container">
+        <!-- Header -->
+        <header class="header">
+            <a href="/" class="back-button">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Back
+            </a>
+            <div class="logo">Unveiled</div>
+            <div class="header-user">
+                <button id="profile-button" class="profile-button">
+                    <div class="user-avatar">U</div>
+                    <span class="username">Username</span>
+                </button>
+                <button id="logout-button" class="logout-button" onclick="handleLogout()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M16 17L21 12L16 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M21 12H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Logout
+                </button>
+            </div>
+        </header>
+
+        <div class="content-wrapper">
+            <!-- Left Side - User Info -->
+            <nav class="side-nav">
+                <div class="profile-info">
+                    <div class="profile-avatar">
+                        <div class="user-avatar" style="width: 100px; height: 100px; font-size: 2.5rem; margin: 0 auto 1rem;">U</div>
+                    </div>
+                    <h2 class="profile-name">Username</h2>
+                    <p class="profile-bio">Alternative Artist | Creator | Visionary</p>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <span class="stat-value">42</span>
+                            <span class="stat-label">Creations</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">128</span>
+                            <span class="stat-label">Following</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">256</span>
+                            <span class="stat-label">Followers</span>
+                        </div>
+                    </div>
+                    <button class="primary edit-profile-btn" onclick="openModal('edit-profile-modal')">Edit Profile</button>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <div class="profile-tabs">
+                    <button class="tab-button active">Portfolio</button>
+                    <button class="tab-button">Collections</button>
+                    <button class="tab-button">Underground</button>
+                </div>
+                
+                <div class="section-grid">
+                    <!-- Portfolio Items -->
+                    <div class="content-section">
+                        <h2 class="section-title">Latest Creation</h2>
+                        <div class="section-content">
+                            <p>Cyberpunk Series - "Neural Networks"</p>
+                        </div>
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-title">Featured Work</h2>
+                        <div class="section-content">
+                            <p>"Dark Reflections" - Mixed Media Installation</p>
+                        </div>
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-title">Recent Show</h2>
+                        <div class="section-content">
+                            <p>"Underground Visions" at The Hidden Gallery</p>
+                        </div>
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-title">Next Event</h2>
+                        <div class="section-content">
+                            <p>Alternative Art Collective - Digital Dystopia Night</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Right Side - Activity Feed -->
+            <nav class="side-nav">
+                <h2>Underground Activity</h2>
+                <ul class="nav-list activity-feed">
+                    <div class="nav-category">Today</div>
+                    <li><a href="#new-work">Released new digital artwork</a></li>
+                    <li><a href="#comment">Joined Dark Arts Collective</a></li>
+                    
+                    <div class="nav-category">This Week</div>
+                    <li><a href="#exhibition">Launched virtual installation</a></li>
+                    <li><a href="#collab">Started underground collaboration</a></li>
+                    <li><a href="#workshop">Hosted alternative art session</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Edit Profile Modal -->
+        <div class="modal-overlay" id="edit-profile-modal">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <h2 class="modal-title">Edit Profile</h2>
+                    <button class="close-modal" onclick="closeModal('edit-profile-modal')">&times;</button>
+                </div>
+                <form class="modal-form" id="edit-profile-form" onsubmit="handleProfileUpdate(event)">
+                    <div class="form-group">
+                        <label for="edit-username">Username</label>
+                        <input type="text" id="edit-username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-bio">Bio</label>
+                        <textarea id="edit-bio" rows="4"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-email">Email</label>
+                        <input type="email" id="edit-email" required>
+                    </div>
+                    <button type="submit" class="primary">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Additional Profile Styles */
+        .profile-info {
+            text-align: center;
+        }
+
+        .profile-avatar {
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-name {
+            color: var(--accent-beige);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-bio {
+            color: var(--light-gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem 0;
+            border-top: 1px solid var(--accent-gray);
+            border-bottom: 1px solid var(--accent-gray);
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .stat-value {
+            color: var(--accent-beige);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .stat-label {
+            color: var(--light-gray);
+            font-size: 0.9rem;
+        }
+
+        .edit-profile-btn {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .profile-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--accent-gray);
+            padding-bottom: 1rem;
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            color: var(--light-gray);
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .tab-button:hover {
+            color: var(--accent-beige);
+            background: none;
+        }
+
+        .tab-button.active {
+            color: var(--accent-beige);
+            border-bottom: 2px solid var(--accent-beige);
+        }
+
+        .activity-feed li {
+            margin-bottom: 1rem;
+        }
+
+        .activity-feed a {
+            font-size: 0.9rem;
+        }
+
+        textarea {
+            background-color: var(--dark-bg);
+            border: 1px solid var(--accent-gray);
+            border-radius: 5px;
+            padding: 0.8rem;
+            color: var(--lighter-gray);
+            font-family: 'Jura', sans-serif;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent-beige);
+        }
+
+        .back-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--light-gray);
+            text-decoration: none;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            color: var(--accent-beige);
+            background: rgba(243, 223, 162, 0.1);
+        }
+
+        .header {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .header-user {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logout-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: none;
+            border: 1px solid var(--accent-gray);
+            color: var(--light-gray);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Jura', sans-serif;
+        }
+
+        .logout-button:hover {
+            color: var(--accent-beige);
+            border-color: var(--accent-beige);
+            background: rgba(243, 223, 162, 0.1);
+        }
+    </style>
+
+    <script>
+        // Load profile data
+        async function loadProfile() {
+            try {
+                const response = await fetch('/api/profile');
+                if (response.ok) {
+                    const user = await response.json();
+                    updateProfileUI(user);
+                } else {
+                    window.location.href = '/';
+                }
+            } catch (err) {
+                console.error('Error loading profile:', err);
+            }
+        }
+
+        function updateProfileUI(user) {
+            // Update header
+            document.querySelector('.user-avatar').textContent = user.username.charAt(0).toUpperCase();
+            document.querySelector('.username').textContent = user.username;
+
+            // Update profile info
+            document.querySelector('.profile-name').textContent = user.username;
+            document.querySelector('.profile-bio').textContent = user.bio || 'Artist | Creator | Innovator';
+
+            // Update edit form
+            document.getElementById('edit-username').value = user.username;
+            document.getElementById('edit-bio').value = user.bio || '';
+            document.getElementById('edit-email').value = user.email;
+        }
+
+        async function handleProfileUpdate(event) {
+            event.preventDefault();
+            const username = document.getElementById('edit-username').value;
+            const bio = document.getElementById('edit-bio').value;
+            const email = document.getElementById('edit-email').value;
+
+            try {
+                const response = await fetch('/api/profile', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, bio, email })
+                });
+
+                if (response.ok) {
+                    closeModal('edit-profile-modal');
+                    loadProfile();
+                }
+            } catch (err) {
+                console.error('Error updating profile:', err);
+            }
+        }
+
+        // Modal functionality
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Tab functionality
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+            });
+        });
+
+        // Load profile when page loads
+        document.addEventListener('DOMContentLoaded', loadProfile);
+
+        // Logout functionality
+        async function handleLogout() {
+            try {
+                console.log('Attempting to logout...');
+                const response = await fetch('/logout', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    console.log('Logout successful');
+                    // Clear any stored user data/tokens
+                    localStorage.removeItem('userToken');
+                    sessionStorage.removeItem('userToken');
+                    
+                    // Redirect to main page and force reload
+                    window.location.href = '/?logout=true';
+                } else {
+                    console.error('Logout failed:', response.status);
+                }
+            } catch (err) {
+                console.error('Error during logout:', err);
+            }
+        }
+    </script>
+</body>
+</html> 
