@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unveilled - Reveal What's Hidden</title>
+    <title>Unveiled - Reveal What's Hidden</title>
     <link rel="stylesheet" href="/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -11,7 +11,7 @@
     <div class="main-container">
         <!-- Header -->
         <header class="header">
-            <div class="logo">Unveilled</div>
+            <div class="logo">Unveiled</div>
             <div class="header-user">
                 <!-- Profile Button (visible when logged in) -->
                 <button id="profile-button" class="profile-button" style="display: none;" onclick="window.location.href='/profile.html'">
@@ -206,7 +206,7 @@
             border: 1px solid var(--accent-gray);
             color: var(--light-gray);
             padding: 0.5rem 1rem;
-            border-radius: 5px;
+            border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: 'Jura', sans-serif;
@@ -216,12 +216,108 @@
             color: var(--accent-beige);
             border-color: var(--accent-beige);
             background: rgba(243, 223, 162, 0.1);
+            transform: translateY(-2px);
         }
 
         .header-user {
             display: flex;
             align-items: center;
             gap: 1rem;
+        }
+
+        /* Dynamic layout styles */
+        .content-section {
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .content-section:hover {
+            transform: translateY(-5px);
+        }
+
+        .section-featured {
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-featured::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-beige), transparent);
+            border-radius: 30px 30px 0 0;
+        }
+
+        .section-tall {
+            border-radius: 25px;
+        }
+
+        .section-large {
+            border-radius: 15px 35px 15px 35px;
+        }
+
+        .nav-list {
+            border-radius: 15px;
+            padding: 1rem;
+            background: rgba(40, 40, 40, 0.5);
+        }
+
+        .nav-list a {
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .nav-list a:hover {
+            background: rgba(243, 223, 162, 0.1);
+            transform: translateX(10px);
+        }
+
+        .modal-card {
+            border-radius: 25px;
+        }
+
+        .profile-button {
+            border-radius: 15px;
+        }
+
+        .user-avatar {
+            border-radius: 12px;
+        }
+
+        .auth-section button {
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .auth-section button:hover {
+            transform: translateY(-2px);
+        }
+
+        .section-content {
+            padding: 1.5rem;
+            border-radius: inherit;
+        }
+
+        .main-container {
+            max-width: 1100px; /* Set maximum width */
+            margin: 0 auto; /* Center the container */
+            padding: 0 20px; /* Add some padding for smaller screens */
+        }
+
+        /* Additional styles for responsiveness */
+        @media (max-width: 1100px) {
+            .main-container {
+                width: 100%; /* Allow full width on smaller screens */
+                padding: 0 10px; /* Adjust padding for smaller screens */
+            }
         }
     </style>
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile - Unveilled</title>
+    <title>Profile - Unveiled</title>
     <link rel="stylesheet" href="/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -17,7 +17,7 @@
                 </svg>
                 Back
             </a>
-            <div class="logo">Unveilled</div>
+            <div class="logo">Unveiled</div>
             <div class="header-user">
                 <button id="profile-button" class="profile-button">
                     <div class="user-avatar">U</div>
@@ -147,10 +147,28 @@
         /* Additional Profile Styles */
         .profile-info {
             text-align: center;
+            background: rgba(40, 40, 40, 0.5);
+            border-radius: 25px;
+            padding: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-info:hover {
+            transform: translateY(-5px);
         }
 
         .profile-avatar {
             margin-bottom: 1.5rem;
+        }
+
+        .profile-avatar .user-avatar {
+            border-radius: 20px;
+            transform: rotate(-5deg);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-avatar .user-avatar:hover {
+            transform: rotate(0deg);
         }
 
         .profile-name {
@@ -178,6 +196,13 @@
             display: flex;
             flex-direction: column;
             gap: 0.25rem;
+            padding: 0.5rem;
+            border-radius: 12px;
+            transition: background 0.3s ease;
+        }
+
+        .stat:hover {
+            background: rgba(243, 223, 162, 0.1);
         }
 
         .stat-value {
@@ -194,6 +219,12 @@
         .edit-profile-btn {
             width: 100%;
             margin-top: 1rem;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .edit-profile-btn:hover {
+            transform: translateY(-2px);
         }
 
         .profile-tabs {
@@ -212,16 +243,19 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-size: 1.1rem;
+            border-radius: 12px;
         }
 
         .tab-button:hover {
             color: var(--accent-beige);
-            background: none;
+            background: rgba(243, 223, 162, 0.1);
+            transform: translateY(-2px);
         }
 
         .tab-button.active {
             color: var(--accent-beige);
             border-bottom: 2px solid var(--accent-beige);
+            background: rgba(243, 223, 162, 0.05);
         }
 
         .activity-feed li {
@@ -230,22 +264,33 @@
 
         .activity-feed a {
             font-size: 0.9rem;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .activity-feed a:hover {
+            background: rgba(243, 223, 162, 0.1);
+            transform: translateX(10px);
         }
 
         textarea {
             background-color: var(--dark-bg);
             border: 1px solid var(--accent-gray);
-            border-radius: 5px;
+            border-radius: 15px;
             padding: 0.8rem;
             color: var(--lighter-gray);
             font-family: 'Jura', sans-serif;
             resize: vertical;
             min-height: 100px;
+            transition: all 0.3s ease;
         }
 
         textarea:focus {
             outline: none;
             border-color: var(--accent-beige);
+            transform: translateY(-2px);
         }
 
         .back-button {
@@ -255,13 +300,14 @@
             color: var(--light-gray);
             text-decoration: none;
             padding: 0.5rem;
-            border-radius: 5px;
+            border-radius: 12px;
             transition: all 0.3s ease;
         }
 
         .back-button:hover {
             color: var(--accent-beige);
             background: rgba(243, 223, 162, 0.1);
+            transform: translateX(-5px);
         }
 
         .header {
@@ -271,10 +317,25 @@
             gap: 2rem;
         }
 
-        .header-user {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
+        .content-section {
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .content-section:hover {
+            transform: translateY(-5px);
+        }
+
+        .modal-card {
+            border-radius: 25px;
+        }
+
+        .nav-list {
+            border-radius: 15px;
+            padding: 1rem;
+            background: rgba(40, 40, 40, 0.5);
         }
 
         .logout-button {
@@ -285,7 +346,7 @@
             border: 1px solid var(--accent-gray);
             color: var(--light-gray);
             padding: 0.5rem 1rem;
-            border-radius: 5px;
+            border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: 'Jura', sans-serif;
@@ -295,6 +356,21 @@
             color: var(--accent-beige);
             border-color: var(--accent-beige);
             background: rgba(243, 223, 162, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .main-container {
+            max-width: 1100px; /* Set maximum width */
+            margin: 0 auto; /* Center the container */
+            padding: 0 20px; /* Add some padding for smaller screens */
+        }
+
+        /* Additional styles for responsiveness */
+        @media (max-width: 1100px) {
+            .main-container {
+                width: 100%; /* Allow full width on smaller screens */
+                padding: 0 10px; /* Adjust padding for smaller screens */
+            }
         }
     </style>
 
