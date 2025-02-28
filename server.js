@@ -4,18 +4,22 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
 const path = require('path');
+const bodyParser = require('body-parser');
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 // Middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public'), {
+    index: 'index.html' // Explicitly set index.html as the default file
+}));
 app.use(session({
-    secret: process.env.SESSION_SECRET,
+    secret: 'unveiled-secret-key',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: true,
+    cookie: { secure: false } // Set to true if using HTTPS
 }));
 
 // MongoDB Connection
@@ -105,6 +109,13 @@ app.post('/logout', (req, res) => {
     res.redirect('/');
 });
 
+// Add this route to debug CSS loading issues
+app.get('/styles.css', (req, res) => {
+    console.log('CSS requested');
+    res.sendFile(path.join(__dirname, 'public', 'styles.css'));
+});
+
 app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+    console.log(`Unveiled server running on http://localhost:${port}`);
+    console.log(`View the website at http://localhost:${port}/index.html`);
 }); 
